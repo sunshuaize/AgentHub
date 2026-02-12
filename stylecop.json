@@ -1,0 +1,80 @@
+{
+    "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+    "settings": {
+        // 文档注释规则：仅类和方法需文档注释，其他元素允许普通注释
+        "documentationRules": {
+            "fileNamingConvention": "metadata", 
+            "documentExposedElements": true, 
+            "documentInternalElements": false, 
+            "documentPrivateElements": false 
+        },
+
+        // 严格的命名规则
+        "namingRules": {
+            "allowCommonHungarianPrefixes": false, 
+            "requireHungarianPrefix": false,
+            "allowUnderscoresInPublicNames": false 
+        },
+
+        // 严格的布局规则
+        "layoutRules": {
+            "indentationSize": 4, 
+            "tabSize": 4,
+            "useTabs": false,
+            "maxLineLength": 120, 
+            "newLinesBetweenMembers": "always" 
+        },
+
+        // 严格的可读性规则
+        "readabilityRules": {
+            "allowTrailingWhitespace": false, 
+            "allowMultipleSpaces": false 
+        },
+
+        // 规则开关
+        "rules": {
+            // 格式类规则
+            "SA1000": { "enabled": true }, 
+            "SA1002": { "enabled": true }, 
+            "SA1003": { "enabled": true }, 
+            "SA1027": { "enabled": true }, 
+
+            // 布局类规则
+            "SA1500": { "enabled": true }, 
+            "SA1501": { "enabled": true }, 
+            "SA1502": { "enabled": true }, 
+            "SA1503": { "enabled": true }, 
+            "SA1505": { "enabled": true }, 
+            "SA1512": { "enabled": true },
+
+            // 命名类规则
+            "SA1300": { "enabled": true }, 
+            "SA1303": { "enabled": true }, 
+            "SA1306": { "enabled": true }, 
+            "SA1309": { "enabled": true }, 
+            "SA1312": { "enabled": true }, 
+            "SA1313": { "enabled": true }, 
+
+            // 注释类规则：仅保留类和方法的文档注释要求
+            "SA1600": { "enabled": true }, 
+            "SA1604": { "enabled": true },
+            "SA1611": { "enabled": true }, 
+
+            // 禁用其他元素的文档注释
+            "SA1602": { "enabled": false }, 
+            "SA1605": { "enabled": false }, 
+            "SA1637": { "enabled": false }, 
+            "SA1652": { "enabled": false }, 
+            "SA1005": { "enabled": false }, 
+            "SA1518": { "enabled": false }, 
+
+            // 其他严格规则
+            "SA1200": { "enabled": true }, 
+            "SA1201": { "enabled": true }, 
+            "SA1400": { "enabled": true }, 
+            "SA1401": { "enabled": true }, 
+            "SA1516": { "enabled": true } 
+        }
+    }
+}
+    

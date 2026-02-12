@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgentHub - Add AI Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6467f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101122",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .win-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen relative overflow-hidden">
+<!-- Background Dashboard (Blurred) -->
+<div class="absolute inset-0 z-0 blur-md opacity-40 flex flex-col pointer-events-none p-6">
+<header class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-icons">hub</span>
+</div>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white">AgentHub</h1>
+</div>
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+</div>
+</header>
+<div class="grid grid-cols-4 gap-6 mb-8">
+<div class="h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800"></div>
+<div class="h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800"></div>
+<div class="h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800"></div>
+<div class="h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800"></div>
+</div>
+<div class="flex-1 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="w-48 h-8 bg-slate-100 dark:bg-slate-800 rounded"></div>
+<div class="w-32 h-10 bg-primary rounded"></div>
+</div>
+<div class="space-y-4">
+<div class="h-12 bg-slate-50 dark:bg-slate-800/50 rounded-lg"></div>
+<div class="h-12 bg-slate-50 dark:bg-slate-800/50 rounded-lg"></div>
+<div class="h-12 bg-slate-50 dark:bg-slate-800/50 rounded-lg"></div>
+<div class="h-12 bg-slate-50 dark:bg-slate-800/50 rounded-lg"></div>
+</div>
+</div>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-slate-900/30 dark:bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center p-4">
+<!-- Modal Container (WPF/Windows Style) -->
+<div class="bg-white dark:bg-[#1e1e2d] w-full max-w-md rounded-lg win-shadow border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden">
+<!-- Modal Header -->
+<div class="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-icons text-primary text-sm">add_circle_outline</span>
+<h2 class="text-sm font-semibold text-slate-800 dark:text-slate-200">添加 AI 编辑器</h2>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+<span class="material-icons text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Content -->
+<div class="p-5 space-y-5">
+<!-- Editor Name -->
+<div class="space-y-1.5">
+<label class="block text-xs font-medium text-slate-500 dark:text-slate-400" for="editor-name">编辑器名称</label>
+<input class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all dark:text-white" id="editor-name" placeholder="例如: Cursor, VS Code" type="text"/>
+</div>
+<!-- Config File Path -->
+<div class="space-y-1.5">
+<label class="block text-xs font-medium text-slate-500 dark:text-slate-400" for="config-path">配置文件路径</label>
+<div class="flex gap-2">
+<input class="flex-1 px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all dark:text-white" id="config-path" placeholder="C:\Users\Admin\AppData\Roaming\Cursor\User\settings.json" type="text"/>
+<button class="px-3 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors whitespace-nowrap">
+                            浏览...
+                        </button>
+</div>
+</div>
+<!-- MCP Config Key -->
+<div class="space-y-1.5">
+<label class="block text-xs font-medium text-slate-500 dark:text-slate-400" for="mcp-key">MCP 配置键名 (Key)</label>
+<div class="relative">
+<select class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded focus:ring-1 focus:ring-primary focus:border-primary outline-none appearance-none transition-all dark:text-white" id="mcp-key">
+<option value="mcpServers">mcpServers</option>
+<option value="mcpConfig">mcpConfig</option>
+<option value="custom">自定义 (Custom)</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<span class="material-icons text-slate-400 text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Icon Selection -->
+<div class="space-y-1.5">
+<label class="block text-xs font-medium text-slate-500 dark:text-slate-400" for="editor-icon">图标 (Emoji 或 图标代码)</label>
+<div class="flex items-center gap-3">
+<input class="w-20 px-3 py-2 text-center text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all dark:text-white" id="editor-icon" type="text" value="🔧"/>
+<p class="text-[11px] text-slate-400 leading-tight">
+                            该图标将显示在侧边栏和编辑器列表中
+                        </p>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-5 py-4 bg-slate-50 dark:bg-[#1a1a27] border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3">
+<button class="px-4 py-1.5 text-sm font-medium text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    取消
+                </button>
+<button class="px-6 py-1.5 text-sm font-medium text-white bg-primary rounded shadow-sm hover:brightness-110 active:scale-[0.98] transition-all">
+                    确定
+                </button>
+</div>
+</div>
+</div>
+<!-- Small watermark for desktop context -->
+<div class="fixed bottom-4 left-4 z-50 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur border border-slate-200/50 dark:border-slate-700/50 shadow-sm pointer-events-none">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] uppercase tracking-wider font-bold text-slate-500 dark:text-slate-400">AgentHub Native v2.4.0</span>
+</div>
+</body></html>

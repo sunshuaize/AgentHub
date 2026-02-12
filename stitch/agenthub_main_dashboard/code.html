@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgentHub Main Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#6467f2",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101122",
+                        "win-header": "#1E1E2E",
+                        "win-sidebar": "#FAFAFA",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        .window-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 antialiased h-screen flex items-center justify-center p-4">
+<!-- Native Window Mockup -->
+<div class="w-full h-full max-w-7xl max-h-[900px] bg-white dark:bg-slate-900 rounded-xl overflow-hidden flex flex-col window-shadow border border-slate-200 dark:border-slate-800">
+<!-- Header Bar / Windows Title Bar -->
+<header class="bg-win-header h-12 flex items-center justify-between px-4 select-none flex-shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-icons text-[16px]">hub</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-white font-bold tracking-tight">AgentHub</span>
+<span class="bg-primary/20 text-primary text-[10px] px-1.5 py-0.5 rounded font-medium border border-primary/30 uppercase">v1.0</span>
+</div>
+</div>
+<!-- Window Controls -->
+<div class="flex items-center h-full">
+<button class="px-4 h-full flex items-center text-slate-400 hover:bg-white/10 transition-colors">
+<span class="material-icons text-sm">remove</span>
+</button>
+<button class="px-4 h-full flex items-center text-slate-400 hover:bg-white/10 transition-colors">
+<span class="material-icons text-sm">crop_square</span>
+</button>
+<button class="px-4 h-full flex items-center text-slate-400 hover:bg-red-500 hover:text-white transition-colors">
+<span class="material-icons text-sm">close</span>
+</button>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Left Sidebar (AI Editors) -->
+<aside class="w-64 bg-win-sidebar dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-4">
+<h2 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">AI Editors</h2>
+<nav class="space-y-1">
+<button class="w-full flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg border border-primary/20">
+<span class="text-xl">🤖</span>
+<div class="text-left flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Claude Code</p>
+<span class="text-[10px] bg-primary/20 text-primary px-1 rounded">Active</span>
+</div>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group">
+<span class="text-xl">🧭</span>
+<div class="text-left flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-slate-900 truncate">Cursor</p>
+<span class="text-[10px] text-slate-400">Auto-detected</span>
+</div>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-colors group">
+<span class="text-xl">🌊</span>
+<div class="text-left flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-slate-900 truncate">Windsurf</p>
+<span class="text-[10px] text-slate-400">User-added</span>
+</div>
+</button>
+</nav>
+</div>
+<div class="mt-auto p-4">
+<button class="w-full py-2 flex items-center justify-center gap-2 border-2 border-dashed border-slate-300 dark:border-slate-700 text-slate-500 hover:border-primary hover:text-primary transition-all rounded-lg text-sm font-medium">
+<span class="material-icons text-sm">add</span>
+                        Add Editor
+                    </button>
+</div>
+</aside>
+<!-- Center Column (MCP & Skills Tree) -->
+<main class="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 overflow-y-auto">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-white/80 dark:bg-slate-900/80 sticky top-0 backdrop-blur-sm z-10">
+<h2 class="text-sm font-bold text-slate-800 dark:text-slate-200">Explorer</h2>
+<div class="flex gap-1">
+<button class="p-1 text-slate-400 hover:text-primary rounded"><span class="material-icons text-sm">refresh</span></button>
+<button class="p-1 text-slate-400 hover:text-primary rounded"><span class="material-icons text-sm">filter_list</span></button>
+</div>
+</div>
+<div class="p-2">
+<!-- Tree View Root: MCP Servers -->
+<div class="mb-4">
+<div class="flex items-center gap-1 px-2 py-1 text-slate-800 dark:text-slate-200 font-semibold text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 rounded">
+<span class="material-icons text-xs text-slate-400">expand_more</span>
+<span class="material-icons text-[16px] text-primary/80">dns</span>
+<span>MCP Servers</span>
+</div>
+<div class="ml-6 mt-1 space-y-0.5">
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">folder</span>
+<span>filesystem</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">public</span>
+<span>github</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">search</span>
+<span>google-search</span>
+</div>
+</div>
+</div>
+<!-- Tree View Root: Skills -->
+<div>
+<div class="flex items-center gap-1 px-2 py-1 text-slate-800 dark:text-slate-200 font-semibold text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 rounded">
+<span class="material-icons text-xs text-slate-400">expand_more</span>
+<span class="material-icons text-[16px] text-primary/80">psychology</span>
+<span>Skills</span>
+</div>
+<div class="ml-6 mt-1 space-y-0.5">
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">brush</span>
+<span>frontend-design</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">auto_fix_high</span>
+<span>code-refactor</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded cursor-pointer group">
+<span class="material-icons text-[14px] text-slate-400 group-hover:text-primary">terminal</span>
+<span>shell-executor</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Detail Panel -->
+<section class="flex-1 bg-white dark:bg-slate-900 overflow-y-auto flex flex-col">
+<!-- Detail Header -->
+<div class="p-8 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-6">
+<div class="w-20 h-20 bg-primary/5 rounded-2xl flex items-center justify-center border border-primary/10 shadow-sm shadow-primary/5">
+<span class="text-4xl">🤖</span>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white">Claude Code</h1>
+<span class="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-bold border border-emerald-200 dark:border-emerald-800">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        ACTIVE
+                                    </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm max-w-lg leading-relaxed">
+                                    A next-generation AI coding agent by Anthropic. AgentHub is managing 12 integrated tools and your filesystem MCP server.
+                                </p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 hover:bg-primary/90 shadow-lg shadow-primary/20">
+<span class="material-icons text-sm">settings</span>
+                                Configuration
+                            </button>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-2 rounded-lg text-sm font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+<span class="material-icons text-sm">more_vert</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8">
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+<p class="text-[11px] font-bold text-slate-400 uppercase mb-1">MCP Servers</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">04</span>
+<span class="text-xs text-emerald-500 font-medium">Healthy</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+<p class="text-[11px] font-bold text-slate-400 uppercase mb-1">Active Skills</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">12</span>
+<span class="text-xs text-primary font-medium">Enabled</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800">
+<p class="text-[11px] font-bold text-slate-400 uppercase mb-1">Session Uptime</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-bold text-slate-900 dark:text-white">4.2h</span>
+<span class="text-xs text-slate-400 font-medium">Current</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detail Content -->
+<div class="p-8">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-4">Configuration Files</h3>
+<div class="space-y-3">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-lg group hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-icons text-slate-400 group-hover:text-primary">description</span>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-tighter">System Config</p>
+<code class="text-sm text-slate-700 dark:text-slate-300">C:\Users\User\.claude.json</code>
+</div>
+</div>
+<span class="material-icons text-slate-300 group-hover:text-slate-500">open_in_new</span>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 rounded-lg group hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-icons text-slate-400 group-hover:text-primary">settings_applications</span>
+<div>
+<p class="text-xs font-bold text-slate-500 uppercase tracking-tighter">MCP Bridge</p>
+<code class="text-sm text-slate-700 dark:text-slate-300">C:\Users\User\AppData\Roaming\AgentHub\mcp_claude.yaml</code>
+</div>
+</div>
+<span class="material-icons text-slate-300 group-hover:text-slate-500">open_in_new</span>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
+<span class="material-icons text-sm">restart_alt</span>
+                                Restart Editor
+                            </button>
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
+<span class="material-icons text-sm">terminal</span>
+                                Open Terminal
+                            </button>
+<button class="px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
+<span class="material-icons text-sm">history</span>
+                                View Logs
+                            </button>
+<button class="px-4 py-2 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 rounded-lg text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-100 transition-colors flex items-center gap-2">
+<span class="material-icons text-sm">power_settings_new</span>
+                                Disable Agent
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Status Footer -->
+<footer class="h-6 bg-primary dark:bg-slate-950 px-3 flex items-center justify-between text-[11px] text-white/90 select-none flex-shrink-0">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<span class="material-icons text-[12px]">check_circle</span>
+<span>System Ready</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-icons text-[12px]">cloud_sync</span>
+<span>MCP Sync: Active</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<span class="material-icons text-[12px]">code</span>
+<span>v1.0.4-beta</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-icons text-[12px]">notifications</span>
+</div>
+</div>
+</footer>
+</div>
+</body></html>
